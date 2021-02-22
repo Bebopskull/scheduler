@@ -6,8 +6,8 @@ import "index.scss";
 import DayList from 'components/dayList.js'
 import "components/dayListItem.scss";
 import  Appointment  from "components/appointment/index.js";
-import select from 'helpers/selectors.js'
-import useVisualMode from 'hooks/useVisualMode.js'
+import { getAppointmentsForDay, getInterview, getInterviewersForDay} from 'helpers/selectors.js'
+
 
 
 
@@ -30,7 +30,7 @@ export default function Application(props) {
 
   
 
-  let dailyAppointments = select.getAppointmentsForDay(state, state.day);
+  let dailyAppointments = getAppointmentsForDay(state, state.day);
 
   useEffect(() => {
     
@@ -45,7 +45,7 @@ export default function Application(props) {
       Axios.get(interviewersURL)
       ]).then((all) => {
         setState(prev => ({...prev, days: all[0].data, appointments:  all[1].data, interviewers: all[2].data}));
-
+        console.log(state.interviewers)
       }
     );
 
@@ -55,7 +55,7 @@ export default function Application(props) {
 
   const apps = dailyAppointments.map(appObj => {
 
-    // const interview = select.getInterview(state, appObj.interview);
+    // const interview = getInterview(state, appObj.interview);
     return(
       <Appointment
         key={appObj.id}

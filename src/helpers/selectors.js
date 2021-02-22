@@ -14,7 +14,6 @@
 
   };
 
-
   const getInterview = (state, interview) => {
   	
   	if(!interview || !interview.interviewer){
@@ -28,6 +27,19 @@
  
   };
 
-export default { getAppointmentsForDay, getInterview }
+  const getInterviewersForDay = function(state, day){
+  
+    const [filteredDays] = state.days.filter( jour => jour.name === day);
+    
+    let dayInters;
 
-// module.exports = { getAppointmentsForDay, getInterview }
+    if(filteredDays && filteredDays.interviewers){ dayInters = filteredDays.interviewers}else{return []};
+
+    const inters =dayInters.map(interId => state.interviewers[interId])
+    return inters;
+
+  };
+
+export { getAppointmentsForDay, getInterview , getInterviewersForDay}
+
+// module.exports = { getAppointmentsForDay, getInterview, getInterviewersForDay}
