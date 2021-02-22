@@ -7,6 +7,7 @@ import classNames from "classnames";
 import Header from "components/appointment/header.js";
 import Show from "components/appointment/show.js";
 import Empty from "components/appointment/empty.js";
+import Form from "components/appointment/form.js";
 import useVisualMode from 'hooks/useVisualMode.js'
 
 // import Form from "./form.js";
@@ -15,6 +16,7 @@ import useVisualMode from 'hooks/useVisualMode.js'
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
+const CREATE = "CREATE";
 
 export default function Appointment(props) {
 
@@ -25,11 +27,12 @@ export default function Appointment(props) {
     );
 
 
+
 	const appointmentClass = classNames('appointment__item', {
 			'appointment__item--selected': props.selected,
 		});
 
-	
+// transition(CREATE)
 
 		
   return (
@@ -42,8 +45,10 @@ export default function Appointment(props) {
     	<Header time ={props.time}/>
 
 
-        {mode === EMPTY && <Empty onAdd={() => console.log("Clicked onAdd")} />}
+        {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
         {mode === SHOW && (<Show student={props.interview.student} interviewer={props.interview.interviewer}/>)}
+        {mode === CREATE && (<Form interviewers={props.interviewers} onCancel={props.onCancel} onSave={props.onSave}/>)}
+        
 
     </article>
     );
