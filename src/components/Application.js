@@ -7,6 +7,7 @@ import DayList from 'components/dayList.js'
 import "components/dayListItem.scss";
 import  Appointment  from "components/appointment/index.js";
 import select from 'helpers/selectors.js'
+import useVisualMode from 'hooks/useVisualMode.js'
 
 
 

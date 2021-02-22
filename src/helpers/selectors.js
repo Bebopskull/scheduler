@@ -28,4 +28,6 @@
  
   };
 
-export default {getAppointmentsForDay, getInterview}
+export default { getAppointmentsForDay, getInterview }
+
+// module.exports = { getAppointmentsForDay, getInterview }

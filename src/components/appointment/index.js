@@ -7,14 +7,23 @@ import classNames from "classnames";
 import Header from "components/appointment/header.js";
 import Show from "components/appointment/show.js";
 import Empty from "components/appointment/empty.js";
+import useVisualMode from 'hooks/useVisualMode.js'
 
 // import Form from "./form.js";
 // import Form from "./form.js";
+///mode constants:
 
+const EMPTY = "EMPTY";
+const SHOW = "SHOW";
 
 export default function Appointment(props) {
 
-	
+	// props.interview ? useVisualMode.setMode(SHOW) : useVisualMode.setMode(EMPTY);
+
+    const { mode, transition, back } = useVisualMode(
+        props.interview ? SHOW : EMPTY
+    );
+
 
 	const appointmentClass = classNames('appointment__item', {
 			'appointment__item--selected': props.selected,
@@ -31,12 +40,18 @@ export default function Appointment(props) {
     </article> : <article className={ appointmentClass }>
     	<p>Appointment</p>
     	<Header time ={props.time}/>
-    	{props.interview ? 
-    		<Show student={props.interview.student} interviewer={props.interviewer} onClick={props.onEdit}/> : 
-    		<Empty/>}
-    	{/*<show student= {props.student} interviewer={props.interviewer} onClick={props.onClick}/>*/}
+
+
+        {mode === EMPTY && <Empty onAdd={() => console.log("Clicked onAdd")} />}
+        {mode === SHOW && (<Show student={props.interview.student} interviewer={props.interview.interviewer}/>)}
+
     </article>
     );
     
   
 }
+
+
+        // {props.interview ? 
+            {/*<Show student={props.interview.student} interviewer={props.interviewer} onClick={props.onEdit}/> : */}
+            {/*<Empty/>}*/}
