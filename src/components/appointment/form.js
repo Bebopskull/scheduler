@@ -15,18 +15,19 @@ import Show from "components/appointment/show.js";
 import Confirm from "components/appointment/confirm.js";
 import Status from "components/appointment/status.js";
 import Error from "components/appointment/error.js";
+// import { getAppointmentsForDay, getInterview, getInterviewersForDay} from 'helpers/selectors.js'
 
 
 
 export default function Form(props) {
-  console.log ('props===>',props)
+  console.log('form props===>',props)
 
-  const [name, setName] = useState(props.name || "");
-  const [interviewer, setInterviewer] = useState(props.interviewer || 1);
+  const [name, setName] = useState(props.name );
+  const [interviewer, setInterviewer] = useState(props.interviewer );
 
   const reset = () => {
     setName("");
-    setInterviewer( 1);
+    setInterviewer( null );
   };
 
   const cancel= () => {
@@ -44,20 +45,19 @@ export default function Form(props) {
         <form autoComplete="off" onSubmit={event => event.preventDefault()}>
           <input
             className="appointment__create-input text--semi-bold"
-            name="name"
+            name='name'
             type="text"
             placeholder="Enter Student Name"
-            
             onChange={event => setName(event.target.value)}
-            
+            defaultValue={props.name}
           />
         </form>
-        <InterviewerList interviewers={props.interviewers} interviewer={interviewer} setInterviewer={setInterviewer} />
+        <InterviewerList interviewers={props.interviewers} value={interviewer} setInterviewer={setInterviewer} />
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
           <Button danger onClick={ props.onCancel }>Cancel</Button>
-          <Button confirm onClick={ props.onSave }>Save</Button>
+          <Button confirm onClick={ () => props.onSave(name, interviewer)}>Save</Button>
         </section>
       </section>
     </main>
