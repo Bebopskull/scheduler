@@ -21,3 +21,11 @@ npm test
 ```sh
 npm run storybook
 ```
+
+## Some screenshoots
+
+!['Tweeterio!'](https://github.com/Bebopskull/tweeter/blob/master/public/docs/tweeterio%20screenshoot1.png)
+
+!['Tweet Something!']( https://github.com/Bebopskull/tweeter/blob/master/public/docs/tweeterio%20ss2.png)
+
+!['Mobile version']( https://github.com/Bebopskull/tweeter/blob/master/public/docs/tweeterio_mobile.png)
