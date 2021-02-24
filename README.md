@@ -24,7 +24,7 @@ npm run storybook
 
 ## Some screenshoots
 
-!['ScreenShoot 1'](https://github.com/Bebopskull/scheduler/blob/master/docs/makingNewAppointment.png)
+!['ScreenShoot 1'](https://github.com/Bebopskull/scheduler/blob/master/docs/screenshoot3.png)
 
 !['ScreenShoot 1']( https://github.com/Bebopskull/scheduler/blob/master/docs/screenshoot2.png)
 
