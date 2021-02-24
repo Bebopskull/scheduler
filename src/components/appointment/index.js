@@ -11,7 +11,9 @@ import Form from "components/appointment/form.js";
 import Status from "components/appointment/status.js";
 import Confirm from "components/appointment/confirm.js";
 import Error from "components/appointment/error.js";
-import useVisualMode from 'hooks/useVisualMode.js'
+import useVisualMode from 'hooks/useVisualMode.js';
+import useApplicationData from 'hooks/useApplicationData.js';
+
 
 ///mode constants:
 
@@ -28,66 +30,43 @@ const ERROR_DELETE = "ERROR_DELETE";
 
 
 export default function Appointment(props) {
-
-	// props.interview ? useVisualMode.setMode(SHOW) : useVisualMode.setMode(EMPTY);
-  console.log(props)
+  
     const { mode, transition, back } = useVisualMode(
         props.interview ? SHOW : EMPTY
     );
-
-
 
 	const appointmentClass = classNames('appointment__item', {
 			'appointment__item--selected': props.selected,
 		});
 
-// transition(CREATE)
-
-  // function save(name, interviewer) {
-
-  //   transition(SAVING);
-
-  //   const interview = {
-  //     student: name,
-  //     interviewer
-  //   };
-
-  //   props.bookInterview(props.id, interview)
-  //   .then(() => transition(SHOW))
-  //   .catch(err => transition(ERROR_SAVE, true));
-
-  // }
 
   function save(name, interviewer) {
-    const interview = {
-      student: name,
-      interviewer
-    };
+    if(name && interviewer){
+      const interview = {
+        student: name,
+        interviewer
+      };
 
-    transition(SAVING);
+      transition(SAVING);
 
-    props
-      .bookInterview(props.id, interview)
-      .then(() => transition(SHOW))
-      .catch(error => transition(ERROR_SAVE, true));
+      props
+        .bookInterview(props.id, interview)
+        .then(() => transition(SHOW))
+        .catch(error => transition(ERROR_SAVE, true));
+    }
+    return null
   }
 
-  function del(id){
-    transition(DELETING)
-    props.cancelInterview(id)
-    .then(() => {
-      setTimeout(() => transition(EMPTY),500);
-    })
-    .catch(err => transition(ERROR_DELETE, true));
-  };
-
-  function destroy(event) {
+  function del(event) {
    transition(DELETING, true);
    props
     .cancelInterview(props.id)
+
     .then(() => transition(EMPTY))
-    .catch(error => transition(ERROR_DELETE, true));
+
+    .catch((error) => transition(ERROR_DELETE, true));
   }
+
 
   function confirm(){
     transition(CONFIRM)
@@ -118,7 +97,7 @@ export default function Appointment(props) {
         {mode === CONFIRM && (<Confirm onConfirm={() => del(props.id)} onCancel={() => back()}/>)}
         {mode === EDIT && (<Form name={props.interview.student} interviewers={props.interviewers} interviewer={props.interview.interviewer.id} onCancel={() => back() } onSave={save}/>)}
         {mode === ERROR_SAVE && (<Error message='Error' onClose={() => back()} />)}
-        {mode === ERROR_DELETE && (<Error message='Error' onClose={() => back()} />)}
+        {mode === ERROR_DELETE && (<Error message='Error when deleting' onClose={() => back()} />)}
         
 
     </article>
