@@ -10,6 +10,7 @@ import Empty from "components/appointment/empty.js";
 import Form from "components/appointment/form.js";
 import Status from "components/appointment/status.js";
 import Confirm from "components/appointment/confirm.js";
+import Error from "components/appointment/error.js";
 import useVisualMode from 'hooks/useVisualMode.js'
 
 ///mode constants:
@@ -21,6 +22,10 @@ const SAVING = "SAVING";
 const DELETING = "DELETING";
 const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
+
+
 
 export default function Appointment(props) {
 
@@ -38,20 +43,33 @@ export default function Appointment(props) {
 
 // transition(CREATE)
 
+  // function save(name, interviewer) {
+
+  //   transition(SAVING);
+
+  //   const interview = {
+  //     student: name,
+  //     interviewer
+  //   };
+
+  //   props.bookInterview(props.id, interview)
+  //   .then(() => transition(SHOW))
+  //   .catch(err => transition(ERROR_SAVE, true));
+
+  // }
+
   function save(name, interviewer) {
-
-    transition(SAVING);
-
     const interview = {
       student: name,
       interviewer
     };
-    // console.log(props.bookInterview(props.id, interview))
-    props.bookInterview(props.id, interview)
-    .then(() => {
-      transition(SHOW)
-    })
 
+    transition(SAVING);
+
+    props
+      .bookInterview(props.id, interview)
+      .then(() => transition(SHOW))
+      .catch(error => transition(ERROR_SAVE, true));
   }
 
   function del(id){
@@ -60,7 +78,16 @@ export default function Appointment(props) {
     .then(() => {
       setTimeout(() => transition(EMPTY),500);
     })
+    .catch(err => transition(ERROR_DELETE, true));
   };
+
+  function destroy(event) {
+   transition(DELETING, true);
+   props
+    .cancelInterview(props.id)
+    .then(() => transition(EMPTY))
+    .catch(error => transition(ERROR_DELETE, true));
+  }
 
   function confirm(){
     transition(CONFIRM)
@@ -68,10 +95,6 @@ export default function Appointment(props) {
 
   function edit(){
     transition(EDIT)
-    // props.editInterview(id)
-    // .then(() => {
-    //   // setTimeout(() => transition(SHOW),500);
-    // })
   };
 
 
@@ -93,7 +116,9 @@ export default function Appointment(props) {
         {mode === SAVING && (<Status message='Saving'/>)}
         {mode === DELETING && (<Status message='Deleting'/>)}
         {mode === CONFIRM && (<Confirm onConfirm={() => del(props.id)} onCancel={() => back()}/>)}
-        {mode === EDIT && (<Form name={props.interview.student} interviewers={props.interviewers} interviewer={props.interviewers} onCancel={() => back() } onSave={save}/>)}
+        {mode === EDIT && (<Form name={props.interview.student} interviewers={props.interviewers} interviewer={props.interview.interviewer.id} onCancel={() => back() } onSave={save}/>)}
+        {mode === ERROR_SAVE && (<Error message='Error' onClose={() => back()} />)}
+        {mode === ERROR_DELETE && (<Error message='Error' onClose={() => back()} />)}
         
 
     </article>

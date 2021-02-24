@@ -85,7 +85,9 @@ export default function Application(props) {
       // setState({...state, appointments})
 
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log('Deleting Error ====>', err)
+    })
   }
 
 
