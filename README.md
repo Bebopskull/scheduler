@@ -24,8 +24,8 @@ npm run storybook
 
 ## Some screenshoots
 
-!['Tweeterio!'](https://github.com/Bebopskull/tweeter/blob/master/public/docs/tweeterio%20screenshoot1.png)
+!['ScreenShoot 1'](https://github.com/Bebopskull/scheduler/blob/master/docs/makingNewAppointment.png)
 
-!['Tweet Something!']( https://github.com/Bebopskull/tweeter/blob/master/public/docs/tweeterio%20ss2.png)
+!['ScreenShoot 1']( https://github.com/Bebopskull/scheduler/blob/master/docs/screenshoot2.png)
 
-!['Mobile version']( https://github.com/Bebopskull/tweeter/blob/master/public/docs/tweeterio_mobile.png)
+
