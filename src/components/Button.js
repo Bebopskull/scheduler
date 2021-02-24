@@ -19,8 +19,6 @@ export default function Button(props) {
 	// ///define the class of the button element to make it correspond to the one css document.
 	// let buttonClass = "button";	
 
-
-
 	return (
     <button
       className={buttonClass}

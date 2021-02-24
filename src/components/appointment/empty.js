@@ -2,10 +2,7 @@
 import React from "react";
 
 
-
 export default function Empty(props) {
-
-	// const appointmentClass = classNames('appointment__time');
 	
   return (
     <main className="appointment__add">

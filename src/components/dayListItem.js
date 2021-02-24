@@ -1,7 +1,5 @@
 import React from "react";
-
 import "components/dayListItem.scss";
-
 import classNames from "classnames";
 
 

@@ -1,8 +1,6 @@
 
 import React from "react";
-
 import "components/appointment/styles.scss";
-
 import classNames from "classnames";
 import Header from "components/appointment/header.js";
 import Show from "components/appointment/show.js";
@@ -12,7 +10,6 @@ import Status from "components/appointment/status.js";
 import Confirm from "components/appointment/confirm.js";
 import Error from "components/appointment/error.js";
 import useVisualMode from 'hooks/useVisualMode.js';
-import useApplicationData from 'hooks/useApplicationData.js';
 
 
 ///mode constants:
@@ -76,9 +73,6 @@ export default function Appointment(props) {
     transition(EDIT)
   };
 
-
-
-		
   return (
 
   	props.id ==='last'? <article className={ appointmentClass }>
@@ -106,7 +100,3 @@ export default function Appointment(props) {
   
 }
 
-
-        // {props.interview ? 
-            {/*<Show student={props.interview.student} interviewer={props.interviewer} onClick={props.onEdit}/> : */}
-            {/*<Empty/>}*/}

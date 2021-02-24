@@ -1,12 +1,8 @@
 import React from "react";
 
-import classNames from "classnames";
-
-
 
 export default function Status(props) {
 
-  // const appointmentClass = classNames('appointment__time');
   
   return (
     <main className="appointment__card appointment__card--status">

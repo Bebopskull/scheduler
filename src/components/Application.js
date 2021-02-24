@@ -1,6 +1,5 @@
-///states
-import React, { useState, useEffect } from "react";
-import Axios from "axios";
+
+import React from "react";
 import "components/Application.scss";
 import "index.scss";
 import DayList from 'components/dayList.js'
@@ -9,25 +8,15 @@ import  Appointment  from "components/appointment/index.js";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay} from 'helpers/selectors.js'
 import  useApplicationData  from 'hooks/useApplicationData.js'
 
-
-
-
-
 export default function Application(props) {
-
-
 
   const {
     state,
-    setState,
     setDay,
     bookInterview,
     cancelInterview,
   } = useApplicationData();
   
-
-  let interviewers = getInterviewersForDay(state, state.day);
-
   let dailyAppointments = getAppointmentsForDay(state, state.day);
 
   const apps = dailyAppointments.map(appObj => {
@@ -46,8 +35,6 @@ export default function Application(props) {
       />);
     }    
   );
-
-
 
   return (
     <main className="layout">
@@ -68,7 +55,6 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-         {/*Replace this with the schedule elements durint the "The Scheduler" activity. */}
 
         <ul>{ apps } <Appointment key="last" id='last' time="5pm" /> </ul>
           
