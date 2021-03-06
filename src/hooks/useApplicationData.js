@@ -27,7 +27,7 @@ export default function useApplicationData() {
       }
     );
     
-  }, [state.day, state.appointments]);
+  }, [state.day]);
 
   ///Aliasing///
   const setDay = day => setState({...state, day});
