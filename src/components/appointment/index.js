@@ -75,10 +75,10 @@ export default function Appointment(props) {
 
   return (
 
-  	props.id ==='last'? <article className={ appointmentClass }>
+  	props.id ==='last'? <article className={ appointmentClass } data-testid="appointment">
     	<p>Appointment</p>
     	<Header time ={props.time}/>
-    </article> : <article className={ appointmentClass }>
+    </article> : <article className={ appointmentClass } data-testid="appointment">
     	<p>Appointment</p>
     	<Header time ={props.time}/>
 
